@@ -5,15 +5,26 @@
 
 using namespace Sematena::ViewModel;
 using namespace Sematena::XamlExtensions;
+using namespace Sematena::AvLib;
 
+using namespace Platform;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Controls;
 
-PlayerViewModel::PlayerViewModel( ::Control^ view )
-	: _view( view )
+// the view is necessary to use the VSM :(
+PlayerViewModel::PlayerViewModel( Control^ view, IAvLib^ avLib )
+	: _view( view ),
+	_avLib( avLib )
 {
-	VisualStateManager::GoToState( view, "Stopped", false );
+	//VisualStateManager::GoToState( view, "Stopped", false );
+
+	_avLib->StateChanged += ref new StateChangedHandler( this, &PlayerViewModel::OnStateChanged );
+}
+
+void PlayerViewModel::OnStateChanged( Object^ sender, AvLibStateEventArgs^ args )
+{
+	Playing = args->NewState == PlayState::Playing ? true : false;
 }
 
 ICommand^ PlayerViewModel::PlayCommand::get()
@@ -28,5 +39,12 @@ ICommand^ PlayerViewModel::PlayCommand::get()
 
 void PlayerViewModel::TogglePlay( Object^ parameter )
 {
-	OutputDebugString( L"Play toggled\r\n" );
+	if ( Playing )
+	{
+		_avLib->Stop();
+	}
+	else
+	{
+		_avLib->Play();
+	}
 }

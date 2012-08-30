@@ -8,6 +8,7 @@
 
 using namespace Sematena;
 using namespace Sematena::ViewModel;
+using namespace Sematena::AvLib;
 
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -26,7 +27,8 @@ MainPage::MainPage()
 {
 	InitializeComponent();
 
-	auto playerViewModel = ref new PlayerViewModel(this);
+	auto lib = ref new MEAvLib();
+	auto playerViewModel = ref new PlayerViewModel(this, lib);
 	DataContext = playerViewModel;
 }
 

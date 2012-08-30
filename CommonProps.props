@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <COMMON_INCLUDE>$(SolutionDir)Common</COMMON_INCLUDE>
+    <AVLIB_INCLUDE>$(SolutionDir)AvLib\Include</AVLIB_INCLUDE>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="COMMON_INCLUDE">
+      <Value>$(COMMON_INCLUDE)</Value>
+    </BuildMacro>
+    <BuildMacro Include="AVLIB_INCLUDE">
+      <Value>$(AVLIB_INCLUDE)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

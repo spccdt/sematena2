@@ -64,7 +64,6 @@
     <ClInclude Include="App.xaml.h" />
     <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="BasicPage.xaml.h" />
-    <ClInclude Include="Namespaces.h" />
     <ClInclude Include="ViewModel\PlayerViewModel.h">
       <Filter>ViewModel</Filter>
     </ClInclude>

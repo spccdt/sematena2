@@ -24,3 +24,5 @@ Generated*/
 *.sdf
 *.opensdf
 *.ipch
+*.mdf
+TestResults*/
