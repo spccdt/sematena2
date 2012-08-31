@@ -76,5 +76,7 @@
             </StackPanel>
             <Slider Minimum="0" Maximum="10" TickFrequency="1" TickPlacement="BottomRight" VerticalAlignment="Center"/>
         </StackPanel>
+        
+        <MediaElement x:Name="MediaPlayer"/>
     </Grid>
 </common:LayoutAwarePage>

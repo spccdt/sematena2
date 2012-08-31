@@ -115,6 +115,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(SolutionDir)\AvLibComponent;$(COMMON_INCLUDE);$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(OutDir);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -211,8 +212,8 @@
     <Text Include="Common\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AvLibComponent\AvLibComponent.vcxproj">
-      <Project>{d59c0c15-76d7-4815-88a9-25a3cc76f91b}</Project>
+    <ProjectReference Include="..\Sematena.AvLib\Sematena.AvLib.vcxproj">
+      <Project>{b1d7a860-cebb-45ac-a67e-ab0fdb8e1d93}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

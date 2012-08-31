@@ -23,7 +23,7 @@ private:
 	void TogglePlay( Platform::Object^ parameter );
 
 private:
-	void OnStateChanged( Platform::Object^ sender, Sematena::AvLib::AvLibStateEventArgs^ args );
+	void OnStateChanged( Platform::Object^ sender, Sematena::AvLib::StateChangedEventArgs^ args );
 
 private:
 	Sematena::AvLib::IAvLib^ _avLib;

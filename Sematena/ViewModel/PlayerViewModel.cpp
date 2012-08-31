@@ -22,7 +22,7 @@ PlayerViewModel::PlayerViewModel( Control^ view, IAvLib^ avLib )
 	_avLib->StateChanged += ref new StateChangedHandler( this, &PlayerViewModel::OnStateChanged );
 }
 
-void PlayerViewModel::OnStateChanged( Object^ sender, AvLibStateEventArgs^ args )
+void PlayerViewModel::OnStateChanged( Object^ sender, StateChangedEventArgs^ args )
 {
 	Playing = args->NewState == PlayState::Playing ? true : false;
 }
@@ -41,7 +41,7 @@ void PlayerViewModel::TogglePlay( Object^ parameter )
 {
 	if ( Playing )
 	{
-		_avLib->Stop();
+		_avLib->Pause();
 	}
 	else
 	{

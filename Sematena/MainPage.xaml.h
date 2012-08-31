@@ -18,13 +18,26 @@ namespace Sematena
 	/// </summary>
 	public ref class MainPage sealed
 	{
+	private:
+		~MainPage();
+
 	public:
 		MainPage();
 
 	protected:
-		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+		virtual void LoadState(Platform::Object^ navigationParameter,
+			Windows::Foundation::Collections::IMap<Platform::String^, Platform::Object^>^ pageState) override;
+		virtual void SaveState(Windows::Foundation::Collections::IMap<Platform::String^, Platform::Object^>^ pageState) override;
 
 	private:
-		void playButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void OnLoaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void OnUnloaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		Windows::Foundation::EventRegistrationToken _loadedEventRegToken;
+		Windows::Foundation::EventRegistrationToken _unloadedEventRegToken;
+
+	private:
+		Sematena::AvLib::IAvLib^ _avLib;
+		Sematena::ViewModel::PlayerViewModel^ _playerViewModel;
 	};
 }
