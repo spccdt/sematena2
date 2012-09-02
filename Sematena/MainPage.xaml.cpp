@@ -103,3 +103,19 @@ void MainPage::SaveState(IMap<String^, Object^>^ pageState)
 		_avLib->Pause();
 	}
 }
+
+void Sematena::MainPage::mediaSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->UserChangingMediaPosition = true;
+}
+
+void Sematena::MainPage::mediaSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->UserChangingMediaPosition = false;
+}
+
+void Sematena::MainPage::mediaSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetPosition( mediaSlider->Value );
+	_playerViewModel->UserChangingMediaPosition = false;
+}

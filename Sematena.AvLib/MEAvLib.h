@@ -4,7 +4,8 @@
 
 SEMATENA_AVLIB_NAMESPACE_BEGIN
 
-	public ref class MEAvLib sealed : public [Windows::Foundation::Metadata::Default] IAvLib
+[Windows::Foundation::Metadata::WebHostHidden]
+public ref class MEAvLib sealed : public [Windows::Foundation::Metadata::Default] IAvLib
 {
 private:
 	~MEAvLib();
@@ -13,7 +14,22 @@ public:
 	MEAvLib( Windows::UI::Xaml::Controls::MediaElement^ mediaElement );
 
 public:
-	virtual event StateChangedHandler^ StateChanged;
+	virtual event MediaOpenedHandler^ MediaOpened;
+	virtual event MediaEndedHandler^ MediaEnded;
+	virtual event MediaFailedHandler^ MediaFailed;
+	virtual event MediaStateChangedHandler^ MediaStateChanged;
+
+public:
+	virtual property Windows::Foundation::TimeSpan MediaDuration
+	{
+		Windows::Foundation::TimeSpan get();
+	}
+
+	virtual property Windows::Foundation::TimeSpan MediaPosition
+	{
+		Windows::Foundation::TimeSpan get();
+		void set( Windows::Foundation::TimeSpan value );
+	}
 
 public:
 	virtual void OpenFile(Windows::Storage::StorageFile^ file);
@@ -32,7 +48,7 @@ private:
 	void MEAvLib::OnMediaOpened( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 	void MEAvLib::OnMediaEnded( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 	void MEAvLib::OnMediaFailed( Platform::Object^ sender, Windows::UI::Xaml::ExceptionRoutedEventArgs^ args );
-	void MEAvLib::OnStateChanged( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
+	void MEAvLib::OnMediaStateChanged( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 
 private:
 	//shared_ptr<MEAvLibImpl> _impl;

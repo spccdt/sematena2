@@ -19,7 +19,7 @@ MEAvLib::MEAvLib( MediaElement^ mediaElement )
 	_mediaOpenedEventRegToken = _mediaElement->MediaOpened += ref new RoutedEventHandler( this, &MEAvLib::OnMediaOpened );
 	_mediaEndedEventRegToken = _mediaElement->MediaEnded += ref new RoutedEventHandler( this, &MEAvLib::OnMediaEnded );
 	_mediaFailedEventRegToken = _mediaElement->MediaFailed += ref new ExceptionRoutedEventHandler( this, &MEAvLib::OnMediaFailed );
-	_mediaStateChangedRegToken = _mediaElement->CurrentStateChanged += ref new RoutedEventHandler( this, &MEAvLib::OnStateChanged );
+	_mediaStateChangedRegToken = _mediaElement->CurrentStateChanged += ref new RoutedEventHandler( this, &MEAvLib::OnMediaStateChanged );
 
 	raiseStateChange( PlayState::Closed );
 }
@@ -34,16 +34,18 @@ MEAvLib::~MEAvLib()
 
 void MEAvLib::OnMediaOpened( Object^ sender, RoutedEventArgs^ args )
 {
-	//raiseStateChange( PlayState::Opening );
+	MediaOpened( this, ref new RoutedEventArgs() );
 }
 
 void MEAvLib::OnMediaEnded( Object^ sender, RoutedEventArgs^ args )
 {
-	//raiseStateChange( PlayState::Stopped );
+	MediaEnded( this, ref new RoutedEventArgs() );
 }
 
 void MEAvLib::OnMediaFailed( Object^ sender, ExceptionRoutedEventArgs^ args )
 {
+	MediaFailed( this, ref new RoutedEventArgs() );
+
 	raiseStateChange( PlayState::Error );
 }
 
@@ -67,9 +69,24 @@ namespace
 	}
 }
 
-void MEAvLib::OnStateChanged( Object^ sender, RoutedEventArgs^ args )
+void MEAvLib::OnMediaStateChanged( Object^ sender, RoutedEventArgs^ args )
 {
 	raiseStateChange( translateMediaElementState( _mediaElement->CurrentState ) );
+}
+
+TimeSpan MEAvLib::MediaDuration::get()
+{
+	return _mediaElement->NaturalDuration.TimeSpan;
+}
+
+TimeSpan MEAvLib::MediaPosition::get()
+{
+	return _mediaElement->Position;
+}
+
+void MEAvLib::MediaPosition::set( TimeSpan value )
+{
+	_mediaElement->Position = value;
 }
 
 void MEAvLib::OpenFile( StorageFile^ file )
@@ -104,9 +121,9 @@ void MEAvLib::Pause()
 
 void MEAvLib::raiseStateChange( PlayState state )
 {
-	auto args = ref new StateChangedEventArgs();
+	auto args = ref new MediaStateChangedEventArgs();
 	args->NewState = state;
-	StateChanged( this, args );
+	MediaStateChanged( this, args );
 }
 
 void MEAvLib::Stop()

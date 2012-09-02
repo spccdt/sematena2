@@ -66,7 +66,18 @@
                 <ToggleButton x:Name="repeatButton"/>
                 <Button x:Name="rightButton"/>
             </StackPanel>
-            <Slider Minimum="0" Maximum="10" TickFrequency="1" TickPlacement="BottomRight" VerticalAlignment="Center"/>
+            <Slider Name="mediaSlider"
+                    Minimum="{Binding Path=MinMediaDuration, Mode=OneWay}" 
+                    Maximum="{Binding Path=MaxMediaDuration, Mode=OneWay}" 
+                    StepFrequency="{Binding Path=MediaStep, Mode=OneWay}"
+                    TickFrequency="{Binding Path=MediaStep, Mode=OneWay}"
+                    Value="{Binding Path=MediaPosition, Mode=TwoWay}"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding Path=Ready, Mode=OneWay}"
+                    PointerEntered="mediaSlider_PointerEntered_1"
+                    PointerExited="mediaSlider_PointerExited_1"
+                    PointerCaptureLost="mediaSlider_PointerCaptureLost_1"
+                    />
         </StackPanel>
         
         <MediaElement x:Name="MediaPlayer"/>
