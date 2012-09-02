@@ -33,6 +33,10 @@ namespace Sematena
 		void OnLoaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void OnUnloaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
+		void OnPlayerViewModelPropChanged( Platform::Object^ sender, Windows::UI::Xaml::Data::PropertyChangedEventArgs^ args );
+		
+		void playButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
 	private:
 		void setupResources();
 
@@ -40,18 +44,16 @@ namespace Sematena
 		Windows::Foundation::EventRegistrationToken _loadedEventRegToken;
 		Windows::Foundation::EventRegistrationToken _unloadedEventRegToken;
 
+		Windows::Foundation::EventRegistrationToken _playerViewModelPropChangedEventRegToken;
+
 	private:
 		Sematena::AvLib::IAvLib^ _avLib;
 		Sematena::ViewModel::PlayerViewModel^ _playerViewModel;
-		void Slider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void Slider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void Slider_ValueChanged_1(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
+
 		void mediaSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_PointerCanceled_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_PointerPressed_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_PointerReleased_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_ValueChanged_1(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
 		void mediaSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
 		void mediaSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+
+		Windows::ApplicationModel::Resources::ResourceLoader^ _resourceLoader;
 	};
 }

@@ -23,6 +23,7 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::ApplicationModel::Resources;
 
 MainPage::MainPage()
 {
@@ -34,25 +35,42 @@ MainPage::MainPage()
 	_avLib = ref new MEAvLib( MediaPlayer );
 
 	_playerViewModel = ref new PlayerViewModel(this, _avLib);
+	_playerViewModelPropChangedEventRegToken = 
+		_playerViewModel->PropertyChanged += ref new PropertyChangedEventHandler( this, &MainPage::OnPlayerViewModelPropChanged );
 	DataContext = _playerViewModel;
 
 	setupResources();
 }
 
-void MainPage::setupResources()
-{
-	auto resourceLoader = ref new Windows::ApplicationModel::Resources::ResourceLoader();
-	
-	auto playText = resourceLoader->GetString( L"PlayText" );
-	playButton->Content = playText;
-
-	// TODO: populate other control text here.
-}
-
 MainPage::~MainPage()
 {
+	_playerViewModel->PropertyChanged -= _playerViewModelPropChangedEventRegToken;
+
 	Loaded -= _loadedEventRegToken;
 	Unloaded -= _unloadedEventRegToken;
+}
+
+// Hook the binding update system to apply conditional styling. This is an 
+// acceptable hack for now since XAML/WPF on WinRT doesn't yet support 
+// triggers... and because the VST is overkill for what we need here.
+void MainPage::OnPlayerViewModelPropChanged( Object^ sender, PropertyChangedEventArgs^ args )
+{
+	if ( args->PropertyName == "Playing" )
+	{
+		if ( _playerViewModel->Playing )
+		{
+			playButton->Content = _resourceLoader->GetString( L"PauseText" );
+		}
+		else
+		{
+			playButton->Content = _resourceLoader->GetString( L"PlayText" );
+		}
+	}
+}
+
+void MainPage::setupResources()
+{
+	_resourceLoader = ref new ResourceLoader();
 }
 
 void MainPage::OnLoaded(Object^ sender, RoutedEventArgs^ e)
@@ -118,4 +136,9 @@ void Sematena::MainPage::mediaSlider_PointerCaptureLost_1(Platform::Object^ send
 {
 	_playerViewModel->SetPosition( mediaSlider->Value );
 	_playerViewModel->UserChangingMediaPosition = false;
+}
+
+void Sematena::MainPage::playButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
 }

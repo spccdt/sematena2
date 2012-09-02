@@ -8,6 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <x:String x:Key="playText">Play</x:String>
+        <x:String x:Key="pauseText">Pause</x:String>
+    </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -42,29 +46,15 @@
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Vertical" VerticalAlignment="Center">
             <StackPanel x:Name="playControlsPanel" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
 
-                <Button x:Name="leftButton"/>
-                <Button x:Name="playButton" Command="{Binding Path=PlayCommand, Mode=OneTime}">
-                    <!-- <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="playButtonVisualStateGroup">
-                            <VisualState x:Name="Playing">
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="(UIElement.Content)" Storyboard.TargetProperty="(TextElement.Text)">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource stopText}"/>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </VisualState>
-                            <VisualState x:Name="Stopped">
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="(UIElement.Content)" Storyboard.TargetProperty="(TextElement.Text)">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource playText}"/>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups> -->
-                </Button>
-                <ToggleButton x:Name="repeatButton"/>
-                <Button x:Name="rightButton"/>
+                <Button x:Name="leftButton"
+                        x:Uid="leftButton"/>
+                <Button x:Name="playButton" 
+                        Command="{Binding Path=PlayCommand, Mode=OneTime}" 
+                        Width="80"
+                        Height="50"
+                        Click="playButton_Click_1"/>
+                <Button x:Name="rightButton"
+                        x:Uid="rightButton"/>
             </StackPanel>
             <Slider Name="mediaSlider"
                     Minimum="{Binding Path=MinMediaDuration, Mode=OneWay}" 
