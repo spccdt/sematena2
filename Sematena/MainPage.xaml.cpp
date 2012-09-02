@@ -35,6 +35,18 @@ MainPage::MainPage()
 
 	_playerViewModel = ref new PlayerViewModel(this, _avLib);
 	DataContext = _playerViewModel;
+
+	setupResources();
+}
+
+void MainPage::setupResources()
+{
+	auto resourceLoader = ref new Windows::ApplicationModel::Resources::ResourceLoader();
+	
+	auto playText = resourceLoader->GetString( L"PlayText" );
+	playButton->Content = playText;
+
+	// TODO: populate other control text here.
 }
 
 MainPage::~MainPage()

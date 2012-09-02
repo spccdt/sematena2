@@ -33,6 +33,10 @@ namespace Sematena
 		void OnLoaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void OnUnloaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
+	private:
+		void setupResources();
+
+	private:
 		Windows::Foundation::EventRegistrationToken _loadedEventRegToken;
 		Windows::Foundation::EventRegistrationToken _unloadedEventRegToken;
 

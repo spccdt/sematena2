@@ -8,14 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <x:String x:Key="stopText">Stop</x:String>
-        <x:String x:Key="playText">Play</x:String>
-        <x:String x:Key="leftText">&lt;&lt;</x:String>
-        <x:String x:Key="rightText">&gt;&gt;</x:String>
-        <x:String x:Key="loopText">Repeat mode</x:String>
-    </Page.Resources>
-    
     <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -50,8 +42,8 @@
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Vertical" VerticalAlignment="Center">
             <StackPanel x:Name="playControlsPanel" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
 
-                <Button x:Name="leftButton" Content="{StaticResource leftText}"/>
-                <Button x:Name="playButton" Content="{StaticResource playText}" Command="{Binding Path=PlayCommand, Mode=OneTime}">
+                <Button x:Name="leftButton"/>
+                <Button x:Name="playButton" Command="{Binding Path=PlayCommand, Mode=OneTime}">
                     <!-- <VisualStateManager.VisualStateGroups>
                         <VisualStateGroup x:Name="playButtonVisualStateGroup">
                             <VisualState x:Name="Playing">
@@ -71,8 +63,8 @@
                         </VisualStateGroup>
                     </VisualStateManager.VisualStateGroups> -->
                 </Button>
-                <ToggleButton x:Name="repeatButton" Content="{StaticResource loopText}"/>
-                <Button x:Name="rightButton" Content="{StaticResource rightText}"/>
+                <ToggleButton x:Name="repeatButton"/>
+                <Button x:Name="rightButton"/>
             </StackPanel>
             <Slider Minimum="0" Maximum="10" TickFrequency="1" TickPlacement="BottomRight" VerticalAlignment="Center"/>
         </StackPanel>

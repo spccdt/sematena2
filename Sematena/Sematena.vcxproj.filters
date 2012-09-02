@@ -107,4 +107,7 @@
       <Filter>Common</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources.resw" />
+  </ItemGroup>
 </Project>
