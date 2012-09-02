@@ -57,6 +57,26 @@ public:
 		}
 	}
 
+	property double PlaybackRate
+	{
+		double get() { return _playbackRate; }
+		void set(double value)
+		{
+			_playbackRate = value;
+			OnPropertyChanged( "PlaybackRate" );
+		}
+	}
+
+	property double Volume
+	{
+		double get() { return _volume; }
+		void set(double value)
+		{
+			_volume = value;
+			OnPropertyChanged( "Volume" );
+		}
+	}
+
 	property bool UserChangingMediaPosition;
 
 	property bool Playing
@@ -125,6 +145,8 @@ private:
 	double _maxMediaDuration;
 	double _mediaStep;
 	double _mediaPosition;
+	double _playbackRate;
+	double _volume;
 
 	Windows::UI::Xaml::DispatcherTimer _sliderUpdateTimer;
 

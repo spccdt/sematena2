@@ -89,6 +89,16 @@ void MEAvLib::MediaPosition::set( TimeSpan value )
 	_mediaElement->Position = value;
 }
 
+double MEAvLib::PlaybackRate::get()
+{
+	return _mediaElement->DefaultPlaybackRate;
+}
+
+double MEAvLib::Volume::get()
+{
+	return _mediaElement->Volume;
+}
+
 void MEAvLib::OpenFile( StorageFile^ file )
 {
 	auto openOp = file->OpenAsync( FileAccessMode::Read );

@@ -44,6 +44,16 @@ public:
 		void set( Windows::Foundation::TimeSpan value );
 	}
 
+	property double PlaybackRate
+	{
+		double get();
+	}
+
+	property double Volume
+	{
+		double get();
+	}
+
 public:
 	void OpenFile(Windows::Storage::StorageFile^ file);
 

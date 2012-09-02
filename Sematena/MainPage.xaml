@@ -34,13 +34,47 @@
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Playback speed" FontSize="22" HorizontalAlignment="Center"/>
-            <Slider Grid.Row="1" Minimum="-1" Maximum="1" TickFrequency="0.1" Orientation="Vertical" TickPlacement="Outside" HorizontalAlignment="Center" SmallChange="0.1" StepFrequency="0.1"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Uid="playbackHeader" Grid.Row="0" Text="(Playback rate)" FontSize="22"/>
+                <Slider x:Name="playbackSlider"
+                        Grid.Row="1"
+                        Minimum="0.1" 
+                        Maximum="2.0" 
+                        Orientation="Horizontal" 
+                        TickPlacement="Outside" 
+                        StepFrequency="0.1"
+                        Value="{Binding Path=PlaybackRate, Mode=TwoWay}"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0,40,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Uid="volumeHeader" Grid.Row="0" Text="(Volume)" FontSize="22"/>
+                <Slider x:Name="volumeSlider"
+                        Grid.Row="1"
+                        Minimum="0.0" 
+                        Maximum="1.0" 
+                        Orientation="Horizontal" 
+                        TickPlacement="Outside" 
+                        StepFrequency="0.1"
+                        Value="{Binding Path=Volume, Mode=TwoWay}"/>
+            </Grid>
         </Grid>
 
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Orientation="Vertical" VerticalAlignment="Center">
@@ -48,14 +82,17 @@
 
                 <Button x:Name="leftButton"
                         x:Uid="leftButton"
+                        Content="(&lt;&lt;)"
                         Command="{Binding Path=LeftCommand, Mode=OneTime}"/>
                 <Button x:Name="playButton" 
+                        Content="(Play)"
                         Command="{Binding Path=PlayCommand, Mode=OneTime}" 
                         Width="80"
                         Height="50"
                         Click="playButton_Click_1"/>
                 <Button x:Name="rightButton"
                         x:Uid="rightButton"
+                        Content="(&gt;&gt;)"
                         Command="{Binding Path=RightCommand, Mode=OneTime}"/>
             </StackPanel>
             <Slider Name="mediaSlider"
@@ -71,7 +108,7 @@
                     PointerCaptureLost="mediaSlider_PointerCaptureLost_1"
                     />
         </StackPanel>
-        
+
         <MediaElement x:Name="MediaPlayer"/>
     </Grid>
 </common:LayoutAwarePage>

@@ -21,7 +21,9 @@ PlayerViewModel::PlayerViewModel( Control^ view, IAvLib^ avLib )
 	_minMediaDuration( 0. ),
 	_maxMediaDuration( 1. ),
 	_mediaStep( 1. ),
-	_mediaPosition( 0. )
+	_mediaPosition( 0. ),
+	_volume( 0.5 ),
+	_playbackRate( 1.0 )
 {
 	//VisualStateManager::GoToState( view, "Stopped", false );
 
@@ -82,6 +84,9 @@ void PlayerViewModel::OnMediaOpened( Object^ sender, RoutedEventArgs^ args )
 	MediaStep = calcSecondsInStep( totalSeconds );
 
 	setupTimer( 1 /* second */ );
+
+	PlaybackRate = _avLib->PlaybackRate;
+	Volume = _avLib->Volume;
 }
 
 void PlayerViewModel::setupTimer( double intervalInSeconds )

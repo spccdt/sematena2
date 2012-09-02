@@ -30,6 +30,16 @@ public:
 		Windows::Foundation::TimeSpan get();
 		void set( Windows::Foundation::TimeSpan value );
 	}
+	
+	virtual property double PlaybackRate
+	{
+		double get();
+	}
+
+	virtual property double Volume
+	{
+		double get();
+	}
 
 public:
 	virtual void OpenFile(Windows::Storage::StorageFile^ file);

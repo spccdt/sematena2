@@ -126,10 +126,16 @@
   <data name="PauseText" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="playbackHeader.Text" xml:space="preserve">
+    <value>Playback rate</value>
+  </data>
   <data name="PlayText" xml:space="preserve">
     <value>Play</value>
   </data>
   <data name="rightButton.Content" xml:space="preserve">
     <value>&gt;&gt;</value>
+  </data>
+  <data name="volumeHeader.Text" xml:space="preserve">
+    <value>Volume</value>
   </data>
 </root>
