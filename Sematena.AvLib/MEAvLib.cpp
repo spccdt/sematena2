@@ -75,7 +75,7 @@ void MEAvLib::OnStateChanged( Object^ sender, RoutedEventArgs^ args )
 void MEAvLib::OpenFile( StorageFile^ file )
 {
 	auto openOp = file->OpenAsync( FileAccessMode::Read );
-	create_task( openOp ).then( [this, &file]( task<IRandomAccessStream^> t )
+	create_task( openOp ).then( [this, file]( task<IRandomAccessStream^> t )
 	{
 		try
 		{
