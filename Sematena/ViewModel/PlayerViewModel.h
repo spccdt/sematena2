@@ -15,6 +15,11 @@ public:
 	virtual ~PlayerViewModel();
 
 	void SetPosition( double value );
+	void SetPlaybackRate( double value );
+	void SetVolume( double value );
+
+	void SetEditingPlaybackRate( bool editing ) { _editingPlaybackRate = editing; }
+	void SetEditingVolume( bool editing ) { _editingVolume = editing; }
 
 public:
 	property double MinMediaDuration
@@ -129,6 +134,7 @@ private:
 	void OnMediaEnded( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 	void OnMediaFailed( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 	void OnMediaStateChanged( Platform::Object^ sender, Sematena::AvLib::MediaStateChangedEventArgs^ args );
+	void OnVolumeChanged( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 
 	void OnSliderUpdateTimerTick( Platform::Object^ sender, Platform::Object^ args );
 
@@ -136,6 +142,7 @@ private:
 	Windows::Foundation::EventRegistrationToken _mediaEndedEventRegToken;
 	Windows::Foundation::EventRegistrationToken _mediaFailedEventRegToken;
 	Windows::Foundation::EventRegistrationToken _mediaStateChangedEventRegToken;
+	Windows::Foundation::EventRegistrationToken _volumeChangedEventRegToken;
 
 	Windows::Foundation::EventRegistrationToken _sliderUpdateTimerTickEventRegToken;
 
@@ -147,6 +154,9 @@ private:
 	double _mediaPosition;
 	double _playbackRate;
 	double _volume;
+
+	bool _editingPlaybackRate;
+	bool _editingVolume;
 
 	Windows::UI::Xaml::DispatcherTimer _sliderUpdateTimer;
 

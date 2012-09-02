@@ -20,6 +20,7 @@ MEAvLib::MEAvLib( MediaElement^ mediaElement )
 	_mediaEndedEventRegToken = _mediaElement->MediaEnded += ref new RoutedEventHandler( this, &MEAvLib::OnMediaEnded );
 	_mediaFailedEventRegToken = _mediaElement->MediaFailed += ref new ExceptionRoutedEventHandler( this, &MEAvLib::OnMediaFailed );
 	_mediaStateChangedRegToken = _mediaElement->CurrentStateChanged += ref new RoutedEventHandler( this, &MEAvLib::OnMediaStateChanged );
+	_volumeChangedEventRegToken = _mediaElement->VolumeChanged += ref new RoutedEventHandler( this, &MEAvLib::OnVolumeChanged );
 
 	raiseStateChange( PlayState::Closed );
 }
@@ -30,6 +31,7 @@ MEAvLib::~MEAvLib()
 	_mediaElement->MediaEnded -= _mediaEndedEventRegToken;
 	_mediaElement->MediaFailed -= _mediaFailedEventRegToken;
 	_mediaElement->CurrentStateChanged -= _mediaStateChangedRegToken;
+	_mediaElement->VolumeChanged -= _volumeChangedEventRegToken;
 }
 
 void MEAvLib::OnMediaOpened( Object^ sender, RoutedEventArgs^ args )
@@ -74,6 +76,12 @@ void MEAvLib::OnMediaStateChanged( Object^ sender, RoutedEventArgs^ args )
 	raiseStateChange( translateMediaElementState( _mediaElement->CurrentState ) );
 }
 
+
+void MEAvLib::OnVolumeChanged( Object^ sender, RoutedEventArgs^ args )
+{
+	VolumeChanged( this, ref new RoutedEventArgs() );
+}
+
 TimeSpan MEAvLib::MediaDuration::get()
 {
 	return _mediaElement->NaturalDuration.TimeSpan;
@@ -94,9 +102,19 @@ double MEAvLib::PlaybackRate::get()
 	return _mediaElement->DefaultPlaybackRate;
 }
 
+void MEAvLib::PlaybackRate::set( double value )
+{
+	_mediaElement->PlaybackRate = value;
+}
+
 double MEAvLib::Volume::get()
 {
 	return _mediaElement->Volume;
+}
+
+void MEAvLib::Volume::set( double value )
+{
+	_mediaElement->Volume = value;
 }
 
 void MEAvLib::OpenFile( StorageFile^ file )

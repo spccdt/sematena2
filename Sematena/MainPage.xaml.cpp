@@ -138,7 +138,34 @@ void Sematena::MainPage::mediaSlider_PointerCaptureLost_1(Platform::Object^ send
 	_playerViewModel->UserChangingMediaPosition = false;
 }
 
-void Sematena::MainPage::playButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Sematena::MainPage::playbackSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
 {
+	_playerViewModel->SetEditingPlaybackRate( true );
+}
 
+void Sematena::MainPage::playbackSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetEditingPlaybackRate( false );
+}
+
+void Sematena::MainPage::playbackSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetPlaybackRate( playbackSlider->Value );
+	_playerViewModel->SetEditingPlaybackRate( false );
+}
+
+void Sematena::MainPage::volumeSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetEditingVolume( true );
+}
+
+void Sematena::MainPage::volumeSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetEditingVolume( false );
+}
+
+void Sematena::MainPage::volumeSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e)
+{
+	_playerViewModel->SetVolume( volumeSlider->Value );
+	_playerViewModel->SetEditingVolume( false );
 }

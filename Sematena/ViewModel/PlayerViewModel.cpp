@@ -31,6 +31,7 @@ PlayerViewModel::PlayerViewModel( Control^ view, IAvLib^ avLib )
 	_mediaEndedEventRegToken = _avLib->MediaEnded += ref new MediaEndedHandler( this, &PlayerViewModel::OnMediaEnded );
 	_mediaFailedEventRegToken = _avLib->MediaFailed += ref new MediaFailedHandler( this, &PlayerViewModel::OnMediaFailed );
 	_mediaStateChangedEventRegToken = _avLib->MediaStateChanged += ref new MediaStateChangedHandler( this, &PlayerViewModel::OnMediaStateChanged );
+	_volumeChangedEventRegToken = _avLib->VolumeChanged += ref new VolumeChangedHandler( this, &PlayerViewModel::OnVolumeChanged );
 }
 ;
 PlayerViewModel::~PlayerViewModel()
@@ -48,6 +49,18 @@ void PlayerViewModel::SetPosition( double value )
 	_avLib->MediaPosition = newPos;
 
 	MediaPosition = value; // force immediate update to UI
+}
+
+void PlayerViewModel::SetPlaybackRate( double value )
+{
+	_avLib->PlaybackRate = value;
+	PlaybackRate = value; // force immediate update to UI
+}
+
+void PlayerViewModel::SetVolume( double value )
+{
+	_avLib->Volume = value;
+	Volume = value; // force immediate update to UI
 }
 
 namespace
@@ -85,8 +98,14 @@ void PlayerViewModel::OnMediaOpened( Object^ sender, RoutedEventArgs^ args )
 
 	setupTimer( 1 /* second */ );
 
-	PlaybackRate = _avLib->PlaybackRate;
-	Volume = _avLib->Volume;
+	if ( !_editingPlaybackRate )
+	{
+		PlaybackRate = _avLib->PlaybackRate;
+	}
+	if ( !_editingVolume )
+	{
+		Volume = _avLib->Volume;
+	}
 }
 
 void PlayerViewModel::setupTimer( double intervalInSeconds )
@@ -156,6 +175,14 @@ void PlayerViewModel::OnMediaStateChanged( Object^ sender, MediaStateChangedEven
 		args->NewState == PlayState::Error )
 	{
 		reset();
+	}
+}
+
+void PlayerViewModel::OnVolumeChanged( Object^ sender, RoutedEventArgs^ args )
+{
+	if ( !_editingVolume )
+	{
+		Volume = _avLib->Volume;
 	}
 }
 

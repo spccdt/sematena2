@@ -19,6 +19,8 @@ public:
 	virtual event MediaFailedHandler^ MediaFailed;
 	virtual event MediaStateChangedHandler^ MediaStateChanged;
 
+	virtual event VolumeChangedHandler^ VolumeChanged;
+
 public:
 	virtual property Windows::Foundation::TimeSpan MediaDuration
 	{
@@ -34,11 +36,13 @@ public:
 	virtual property double PlaybackRate
 	{
 		double get();
+		void set( double value );
 	}
 
 	virtual property double Volume
 	{
 		double get();
+		void set( double value );
 	}
 
 public:
@@ -59,6 +63,7 @@ private:
 	void MEAvLib::OnMediaEnded( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 	void MEAvLib::OnMediaFailed( Platform::Object^ sender, Windows::UI::Xaml::ExceptionRoutedEventArgs^ args );
 	void MEAvLib::OnMediaStateChanged( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
+	void MEAvLib::OnVolumeChanged( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
 
 private:
 	//shared_ptr<MEAvLibImpl> _impl;
@@ -68,6 +73,7 @@ private:
 	Windows::Foundation::EventRegistrationToken _mediaEndedEventRegToken;
 	Windows::Foundation::EventRegistrationToken _mediaFailedEventRegToken;
 	Windows::Foundation::EventRegistrationToken _mediaStateChangedRegToken;
+	Windows::Foundation::EventRegistrationToken _volumeChangedEventRegToken;
 };
 
 SEMATENA_AVLIB_NAMESPACE_END

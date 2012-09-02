@@ -55,7 +55,10 @@
                         Orientation="Horizontal" 
                         TickPlacement="Outside" 
                         StepFrequency="0.1"
-                        Value="{Binding Path=PlaybackRate, Mode=TwoWay}"/>
+                        Value="{Binding Path=PlaybackRate, Mode=TwoWay}"
+                        PointerEntered="playbackSlider_PointerEntered_1"
+                        PointerExited="playbackSlider_PointerExited_1"
+                        PointerCaptureLost="playbackSlider_PointerCaptureLost_1"/>
             </Grid>
             <Grid Grid.Row="1" Margin="0,40,0,0">
                 <Grid.ColumnDefinitions>
@@ -73,7 +76,10 @@
                         Orientation="Horizontal" 
                         TickPlacement="Outside" 
                         StepFrequency="0.1"
-                        Value="{Binding Path=Volume, Mode=TwoWay}"/>
+                        Value="{Binding Path=Volume, Mode=TwoWay}"
+                        PointerEntered="volumeSlider_PointerEntered_1"
+                        PointerExited="volumeSlider_PointerExited_1"
+                        PointerCaptureLost="volumeSlider_PointerCaptureLost_1"/>
             </Grid>
         </Grid>
 
@@ -88,8 +94,7 @@
                         Content="(Play)"
                         Command="{Binding Path=PlayCommand, Mode=OneTime}" 
                         Width="80"
-                        Height="50"
-                        Click="playButton_Click_1"/>
+                        Height="50"/>
                 <Button x:Name="rightButton"
                         x:Uid="rightButton"
                         Content="(&gt;&gt;)"

@@ -35,7 +35,15 @@ namespace Sematena
 
 		void OnPlayerViewModelPropChanged( Platform::Object^ sender, Windows::UI::Xaml::Data::PropertyChangedEventArgs^ args );
 		
-		void playButton_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void mediaSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void mediaSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void mediaSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void playbackSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void playbackSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void playbackSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void volumeSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void volumeSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
+		void volumeSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
 
 	private:
 		void setupResources();
@@ -49,10 +57,6 @@ namespace Sematena
 	private:
 		Sematena::AvLib::IAvLib^ _avLib;
 		Sematena::ViewModel::PlayerViewModel^ _playerViewModel;
-
-		void mediaSlider_PointerExited_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_PointerEntered_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-		void mediaSlider_PointerCaptureLost_1(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
 
 		Windows::ApplicationModel::Resources::ResourceLoader^ _resourceLoader;
 	};

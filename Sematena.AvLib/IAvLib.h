@@ -4,7 +4,7 @@
 
 SEMATENA_AVLIB_NAMESPACE_BEGIN 
 
-public enum class PlayState { Closed, Opening, Playing, Paused, Stopped, Error };
+	public enum class PlayState { Closed, Opening, Playing, Paused, Stopped, Error };
 
 public ref struct MediaStateChangedEventArgs sealed
 {
@@ -24,6 +24,9 @@ public delegate void MediaFailedHandler( Platform::Object^ sender, Windows::UI::
 public delegate void MediaStateChangedHandler( Platform::Object^ sender, MediaStateChangedEventArgs^ args );
 
 [Windows::Foundation::Metadata::WebHostHidden]
+public delegate void VolumeChangedHandler( Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args );
+
+[Windows::Foundation::Metadata::WebHostHidden]
 public interface class IAvLib
 {
 public:
@@ -31,6 +34,8 @@ public:
 	event MediaEndedHandler^ MediaEnded;
 	event MediaFailedHandler^ MediaFailed;
 	event MediaStateChangedHandler^ MediaStateChanged;
+
+	event VolumeChangedHandler^ VolumeChanged;
 
 public:
 	property Windows::Foundation::TimeSpan MediaDuration
@@ -47,11 +52,13 @@ public:
 	property double PlaybackRate
 	{
 		double get();
+		void set( double value );
 	}
 
 	property double Volume
 	{
 		double get();
+		void set( double value );
 	}
 
 public:
