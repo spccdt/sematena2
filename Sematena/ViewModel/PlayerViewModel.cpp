@@ -44,6 +44,8 @@ void PlayerViewModel::SetPosition( double value )
 	TimeSpan newPos;
 	newPos.Duration = (int64)value * 10000000; // seconds -> 100-nanoseconds
 	_avLib->MediaPosition = newPos;
+
+	MediaPosition = value; // force immediate update to UI
 }
 
 namespace
@@ -162,6 +164,28 @@ ICommand^ PlayerViewModel::PlayCommand::get()
 	return _playCommand;
 }
 
+ICommand^ PlayerViewModel::LeftCommand::get()
+{
+	if ( _leftCommand == nullptr )
+	{
+		_leftCommand = ref new DelegateCommand( ref new ExecuteDelegate( this, &PlayerViewModel::goLeft ), nullptr );
+	}
+
+	return _leftCommand;
+}
+
+
+ICommand^ PlayerViewModel::RightCommand::get()
+{
+	if ( _rightCommand == nullptr )
+	{
+		_rightCommand = ref new DelegateCommand( ref new ExecuteDelegate( this, &PlayerViewModel::goRight ), nullptr );
+	}
+
+	return _rightCommand;
+}
+
+
 void PlayerViewModel::togglePlay( Object^ parameter )
 {
 	if ( Playing )
@@ -171,5 +195,23 @@ void PlayerViewModel::togglePlay( Object^ parameter )
 	else
 	{
 		_avLib->Play();
+	}
+}
+
+void PlayerViewModel::goLeft( Object^ parameter )
+{
+	double newMediaPos = max( MinMediaDuration, MediaPosition - MediaStep );
+	if ( newMediaPos != MediaPosition )
+	{
+		SetPosition( newMediaPos );
+	}
+}
+
+void PlayerViewModel::goRight( Object^ parameter )
+{
+	double newMediaPos = min( MaxMediaDuration, MediaPosition + MediaStep );
+	if ( newMediaPos != MediaPosition )
+	{
+		SetPosition( newMediaPos );
 	}
 }

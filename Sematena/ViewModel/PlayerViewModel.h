@@ -85,8 +85,20 @@ public:
 		Windows::UI::Xaml::Input::ICommand^ get();
 	}
 
+	property Windows::UI::Xaml::Input::ICommand^ LeftCommand
+	{
+		Windows::UI::Xaml::Input::ICommand^ get();
+	}
+
+	property Windows::UI::Xaml::Input::ICommand^ RightCommand
+	{
+		Windows::UI::Xaml::Input::ICommand^ get();
+	}
+
 private:
 	void togglePlay( Platform::Object^ parameter );
+	void goLeft( Platform::Object^ parameter );
+	void goRight( Platform::Object^ parameter );
 	void setupTimer( double intervalInSeconds );
 	void startTimer();
 	void stopTimer();
@@ -122,6 +134,8 @@ private:
 	Windows::UI::Xaml::Controls::Control^ _view;
 
 	Windows::UI::Xaml::Input::ICommand^ _playCommand;
+	Windows::UI::Xaml::Input::ICommand^ _leftCommand;
+	Windows::UI::Xaml::Input::ICommand^ _rightCommand;
 };
 
 SEMATENA_VIEWMODEL_NAMESPACE_END

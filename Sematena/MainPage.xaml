@@ -47,14 +47,16 @@
             <StackPanel x:Name="playControlsPanel" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
 
                 <Button x:Name="leftButton"
-                        x:Uid="leftButton"/>
+                        x:Uid="leftButton"
+                        Command="{Binding Path=LeftCommand, Mode=OneTime}"/>
                 <Button x:Name="playButton" 
                         Command="{Binding Path=PlayCommand, Mode=OneTime}" 
                         Width="80"
                         Height="50"
                         Click="playButton_Click_1"/>
                 <Button x:Name="rightButton"
-                        x:Uid="rightButton"/>
+                        x:Uid="rightButton"
+                        Command="{Binding Path=RightCommand, Mode=OneTime}"/>
             </StackPanel>
             <Slider Name="mediaSlider"
                     Minimum="{Binding Path=MinMediaDuration, Mode=OneWay}" 
